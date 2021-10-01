@@ -7,16 +7,13 @@ require 'ajudantes.php'; //Arquivo de ferramentas
 
 $exibir_tabela = false;
 
-
-
-
 //include 'banco.php'; // Arquivo de conexão com o Banco
-
 
 //var_dump($lista_tarefas);
 
 if (array_key_exists('nome', $_GET) && $_GET['nome'] != '') {
     $tarefa = [
+        'id' => $_GET['id'],
         'nome' => $_GET['nome'],
         'descricao' => 'null',
         'prazo' => 'null',
@@ -29,24 +26,19 @@ if (array_key_exists('nome', $_GET) && $_GET['nome'] != '') {
     }
 
     if (array_key_exists('prazo', $_GET)) {
-        $tarefa['prazo'] = traduz_data_para_banco ($_GET['prazo']);
+        $tarefa['prazo'] = traduz_data_para_banco($_GET['prazo']);
     }
 
     if (array_key_exists('concluida', $_GET)) {
         $tarefa['concluida'] =  1;
     }
 
-     if(isset($lista_tarefas) && $lista_tarefas > 0){
-            $ultimo = array_key_last($lista_tarefas);
-        
-        
+     
+            editar_tarefa($conexao,$tarefa);
+            header('Location: tarefas.php');
+            die();
 
-        if($lista_tarefas[$ultimo]['nome'] == $tarefa['nome']){
-            echo 'Cadastro existente';
-        }else{
-            inserir_tarefa($conexao,$tarefa);
-        }
-    } 
+
 }
 
 

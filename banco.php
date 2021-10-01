@@ -30,7 +30,7 @@ function inserir_tarefa($conexao, $tarefa){
     if($tarefa['prazo'] == ''){
         $prazo = 'null';
     }else{
-        $prazo = "' {$tarefa['prazo']}'";
+        $prazo = "'{$tarefa['prazo']}'";
     }
 
       $sqlInserir = "INSERT INTO tarefas (nome,descricao,prioridade, prazo, concluida) 
@@ -49,9 +49,35 @@ function inserir_tarefa($conexao, $tarefa){
 
 
 function buscar_tarefa_para_editar($conexao,$id){
-    $sqlBusca = 'SELECT  * FROM tarefas WHERE id = ' .$id;
+    $sqlBusca = 'SELECT * FROM tarefas WHERE id = ' .$id;
+
     $resultado = mysqli_query($conexao,$sqlBusca);
+
     return mysqli_fetch_assoc($resultado);
+}
+
+function editar_tarefa($conexao, $tarefa){
+    if($tarefa['prazo'] == ''){
+      $prazo = 'null';    }
+      else {
+        $prazo = "'{$tarefa['prazo']}'";
+      }
+
+      $sqlBusca = "UPDATE tarefas SET
+                      nome = '{$tarefa['nome']}',
+                      descricao = '{$tarefa['descricao']}',
+                      prioridade = {$tarefa['prioridade']},
+                      prazo = {$prazo},
+                      concluida = {$tarefa['concluida']}
+                      WHERE id = {$tarefa['id']}";
+
+      mysqli_query($conexao,$sqlBusca);
+}
+
+function remover_tarefa($conexao, $id){
+      $sqlDelete = "DELETE FROM tarefas WHERE id = {$id}";
+
+      mysqli_query($conexao, $sqlDelete);
 }
 
 ?>

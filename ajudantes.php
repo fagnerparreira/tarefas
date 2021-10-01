@@ -3,7 +3,6 @@
 function verifica_prioridade($numPrioridade){
   $prioridade = '';
   switch($numPrioridade ){
-  
     case 2:
       $prioridade = 'Média';
       break;
@@ -24,17 +23,17 @@ function traduz_data_para_banco($data){
       return '';
   }
 
-  $objeto_data = DateTime::createFromFormat('d/m/Y',$data);
+  // $objeto_data = DateTime::createFromFormat('d/m/Y',$data);
 
-  return $objeto_data->format('Y-m-d');
+  // return $objeto_data->format('Y-m-d');
 
-  /*
+  
   $dados = explode("/", $data);
 
   $data_banco = "{$dados[2]}-{$dados[1]}-{$dados[0]}";
 
   return $data_banco;
-  */
+ 
 
 }
 
@@ -43,17 +42,17 @@ function traduz_data_para_exibir($data){
       return '';
   }
 
-  $objeto_data = DateTime::createFromFormat('Y-m-d', $data);
+  // $objeto_data = DateTime::createFromFormat('Y-m-d', $data);
 
-  return $objeto_data->format('d/m/Y');
+  // return $objeto_data->format('d/m/Y');
 
-  /*
+  
   $dados = explode("-",$data);
 
   $data_exibir = "{$dados[2]}/{$dados[1]}/{$dados[0]}";
 
   return $data_exibir;
-  */
+  
 }
 
 function verifica_concluida($concluida){
