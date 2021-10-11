@@ -6,30 +6,34 @@ require 'banco.php'; //Arquivo de conexão com o Banco
 require 'ajudantes.php'; //Arquivo de ferramentas
 
 $exibir_tabela = false;
+$tem_erros = false;
+$erros_validacao =[];
 
 //include 'banco.php'; // Arquivo de conexão com o Banco
 
 //var_dump($lista_tarefas);
 
-if (array_key_exists('nome', $_GET) && $_GET['nome'] != '') {
+if (tem_post()) {
     $tarefa = [
-        'id' => $_GET['id'],
-        'nome' => $_GET['nome'],
+        'id' => $_POST['id'],
+        'nome' => $_POST['nome'],
         'descricao' => 'null',
         'prazo' => 'null',
-        'prioridade' => $_GET['prioridade'],
+        'prioridade' => $_POST['prioridade'],
         'concluida' => 0,
     ];
 
-    if (array_key_exists('descricao', $_GET)) {
-        $tarefa['descricao'] = $_GET['descricao'];
+    if (strlen($tarefa['nome']) == 0) {
+        $tem_erros = true;
+        $erros_validacao['nome'] = 'O nome da tarefa é obrigatório!';
+        
     }
 
-    if (array_key_exists('prazo', $_GET)) {
-        $tarefa['prazo'] = traduz_data_para_banco($_GET['prazo']);
+    if (array_key_exists('prazo', $_POST) && strlen($_POST['prazo']) > 0) {
+        $tarefa['prazo'] = traduz_data_para_banco($_POST['prazo']);
     }
 
-    if (array_key_exists('concluida', $_GET)) {
+    if (array_key_exists('concluida', $_POST)) {
         $tarefa['concluida'] =  1;
     }
 

@@ -6,6 +6,8 @@ require 'banco.php'; //Arquivo de conexão com o Banco
 require 'ajudantes.php'; //Arquivo de ferramentas
 
 $exibir_tabela = true;
+$tem_erros = false;
+$erros_validacao = [];
 
 $lista_tarefas = buscar_tarefas($conexao);//Recebe e guarda os resultados de consulta no Banco
 
@@ -15,47 +17,56 @@ $lista_tarefas = buscar_tarefas($conexao);//Recebe e guarda os resultados de con
 
 //var_dump($lista_tarefas);
 
-if (array_key_exists('nome', $_GET) && $_GET['nome'] != '') {
+if (tem_post()) {
         $tarefa = [
-            'nome' => $_GET['nome'],
+            'nome' => $_POST['nome'],
             'descricao' => 'null',
             'prazo' => 'null',
-            'prioridade' => $_GET['prioridade'],
+            'prioridade' => $_POST['prioridade'],
             'concluida' => 0,
         ];
-    
-        if (array_key_exists('descricao', $_GET)) {
-            $tarefa['descricao'] = $_GET['descricao'];
+        
+        if(strlen($tarefa['nome']) == 0){
+            $tem_erros = true;
+            $erros_validacao['nome'] = 'O nome da tarefa é obrigatório!';
         }
 
-        if (array_key_exists('prazo', $_GET)) {
-            $tarefa['prazo'] = traduz_data_para_banco($_GET['prazo']);
+
+        if (array_key_exists('descricao', $_POST)) {
+            $tarefa['descricao'] = $_POST['descricao'];
         }
 
-        if (array_key_exists('concluida', $_GET)) {
+        if (array_key_exists('prazo', $_POST) && strlen($_POST['prazo']) > 0) {
+            if(validar_data($_POST['prazo'])){
+                $tarefa['prazo'] = traduz_data_para_banco($_POST['prazo']);
+            }else{
+                $tem_erros = true;
+                $erros_validacao['prazo'] = 'A data precisa ser dd/mm/aaaa';
+            }
+        }
+
+        if (array_key_exists('concluida', $_POST)) {
             $tarefa['concluida'] = 1;
         }
 
-        if(isset($lista_tarefas) && $lista_tarefas > 0){
-            $ultimo = array_key_last($lista_tarefas);
+       
         
-            if($lista_tarefas[$ultimo]['nome'] == $tarefa['nome']){
-            echo 'Cadastro existente';
-            }else{
-                 inserir_tarefa($conexao,$tarefa);
+        if(!$tem_erros){   
+         inserir_tarefa($conexao, $tarefa);
+        header('Location : tarefas.php');
+        die();
         }
-    }
 }
 
 
 
    $tarefa = [
        'id'         => 0,
-       'nome'       => '',
-       'descricao'  => '',
-       'prazo'      => '',
-       'prioridade' => 1,
-       'concluida'  => ''
+       'nome'       => $_POST['nome'] ?? '',
+       'descricao'  => $_POST['descricao'] ?? '',
+       'prazo'      => (isset($_POST['prazo'])) ? traduz_data_para_banco($_POST ['prazo']) : '',
+       'prioridade' => $_POST['prioridade'] ??  1,
+       'concluida'  =>$_POST['concluida'] ?? ''
    ];
 
 // Include pode avisar sobre ausência ou erro mas não impede a execução do programa
