@@ -82,7 +82,7 @@ function tem_post(){
 }
 
 function validar_data($data){
-    $expressao = '/^[0-9]{1,2}\/[0=9]{1,2}\/[0-9]{4}$/';
+    $expressao = '/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/';
     $resultado = preg_match($expressao, $data);
 
     if($resultado == 0){
@@ -97,5 +97,50 @@ function validar_data($data){
 
     return checkdate($mes, $dia, $ano);
 }
+
+  function traduz_concluida($tarefa){
+    if($tarefa == 1){
+      return 'Sim';
+    }
+
+    return 'Não';
+
+  }
+
+  function exibe_descricao($tarefa){
+      return $tarefa;
+  }
+
+  function traduz_prioridade($tarefa){
+      switch ($tarefa){
+        case 1:
+          return 'Baixa';
+          break;
+        case 2:
+          return 'Média';
+          break;
+        case 3:
+          return 'Alta';
+          break;
+      }
+  }
+
+  function tratar_anexo($anexo){
+      $padrao = '/^.+(\.pdf|\.zip)$/'; //lembra das regex?
+      $resultado = preg_match($padrao, $anexo['name']);
+
+      if($resultado == 0){
+          return false;
+      }
+
+    move_uploaded_file(
+        $anexo['tmp_name'],
+        "anexos/{$anexo['name']}");
+        return true;
+    
+  }
+
+
+
 
 ?>

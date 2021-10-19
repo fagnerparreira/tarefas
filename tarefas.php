@@ -53,7 +53,7 @@ if (tem_post()) {
         
         if(!$tem_erros){   
          inserir_tarefa($conexao, $tarefa);
-        header('Location : tarefas.php');
+        header('Location: tarefas.php');
         die();
         }
 }

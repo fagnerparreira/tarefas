@@ -33,7 +33,7 @@ function inserir_tarefa($conexao, $tarefa){
         $prazo = "'{$tarefa['prazo']}'";
     }
 
-      $sqlInserir = "INSERT INTO tarefas (nome,descricao,prioridade, prazo, concluida) 
+      $sqlInserir = "INSERT INTO tarefas (nome, descricao, prioridade, prazo, concluida) 
                     VALUES
                   (
                       '{$tarefa['nome']}',
@@ -79,5 +79,36 @@ function remover_tarefa($conexao, $id){
 
       mysqli_query($conexao, $sqlDelete);
 }
+
+function buscar_tarefa($conexao,$id){
+  $sqlBusca = "SELECT * FROM tarefas WHERE id = {$id}";
+  $busca = mysqli_query($conexao, $sqlBusca);
+  return mysqli_fetch_assoc($busca);
+
+}
+
+function gravar_anexo($conexao, $anexo){
+    $sqlGravar = "INSERT INTO anexos VALUES
+                  (null,
+                  {$anexo['tarefa_id']},
+                  '{$anexo['nome']}',
+                  '{$anexo['arquivo']}')";
+    mysqli_query($conexao, $sqlGravar);
+
+}
+
+function buscar_anexos($conexao, $id)
+    {
+        $sqlBusca = 'SELECT * FROM anexos WHERE tarefa_id = ' . $id;
+        $resultado = mysqli_query($conexao,$sqlBusca);
+
+        $anexos = [];
+
+        while($anexo = mysqli_fetch_assoc($resultado)){
+            $anexos[] = $anexo;
+        }
+
+        return $anexos;
+    }
 
 ?>
