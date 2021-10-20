@@ -87,7 +87,8 @@ function buscar_tarefa($conexao,$id){
 
 }
 
-function gravar_anexo($conexao, $anexo){
+function gravar_anexo($conexao, $anexo)
+{
     $sqlGravar = "INSERT INTO anexos VALUES
                   (null,
                   {$anexo['tarefa_id']},

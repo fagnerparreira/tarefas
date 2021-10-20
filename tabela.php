@@ -9,7 +9,7 @@
             </tr>
         <?php foreach($lista_tarefas as $tarefas) : ?>
             <tr>
-                <td><a href="tarefa.php?id<?php echo $tarefas['id']; ?>">
+                <td><a href="tarefa.php?id=<?php echo $tarefas['id']; ?>">
                         <?php echo $tarefas['nome'] ?>
                     </a> </td>
                 
