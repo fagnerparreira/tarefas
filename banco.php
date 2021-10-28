@@ -1,9 +1,9 @@
 <?php
 
-$bdServidor = '127.0.0.1';//Pode ser localhost
-$bdUsuario = 'sistema'; //Usuário criado no BD
-$bdSenha = '123456'; // Senha Totalmente exposta do BD
-$bdBanco = 'tarefas'; // Nome do BD dentro do Servidor
+$bdServidor = 'localhost';//Pode ser localhost
+$bdUsuario = 'id17692821_sistema'; //Usuário criado no BD
+$bdSenha = 'd#&SDzku4URd_tpR'; // Senha Totalmente exposta do BD
+$bdBanco = 'id17692821_livraria'; // Nome do BD dentro do Servidor
 
 $conexao = mysqli_connect($bdServidor,$bdUsuario,$bdSenha,$bdBanco);
 

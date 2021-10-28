@@ -1,50 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap");
+
 body {
-  font-family: Sans-serif;
-  color: #333;
+  background-color: #aaaaaa;
+  margin: 0;
+ 
 }
 
-h1 {
+
+
+/*Esse é um comentário CSS*/
+
+h1 , header {
+  font-family: "Roboto Slab", serif;
+  font-size: 52px;
+  color: #ffffff;
+  padding-top: 0%;
+  text-shadow: #000000 2px 2px;
+  text-align: center;
+  
+}
+
+header , h1{
+  display: block;
+  height: 400px;
+  text-align: center;
+  background-image: url(../img/3d-space-scene.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+} 
+
+.menu-principal {
+  width: 100%;
+  background-color: #190b07;
+  height: 60px;
+  margin: auto;
+  text-align: center ;
+  
+ 
+}
+
+#quemsomos {
+  display: block;
+  height: 400px;
+  background-color: #A4A4A4;
+}
+
+#clubetraca {
+  display: block;
+  height: 400px;
+  background-color: #6E6E6E;
+}
+
+#contato {
+  display: block;
+  height: 400px;
+  background-color: #E6E6E6;
+}
+
+.caixa{
+  padding: 60px 0;
+  border: 1px solid #e5e5e5;
+  
+}
+
+.cor{
+  padding: 10px;
+  background-color: grey;
+  
+
+}
+h2 {
+  padding-top: 18px;
+  font-size: 28px;
+  font-weight: bold;
   text-align: center;
 }
 
-.erro {
-  color: #F44;
+nav ul {
+  display: inline-flex;
 }
 
-fieldset {
-  border: 3px double #333;
-  color: #000;
-  margin: 10px 0 0 0;
-}
-
-label {
+nav ul li {
   display: block;
-  margin: 10px 0 0 0;
+  padding: 10px;
 }
 
-input[type=text],
-textarea {
-  width: 100%;
-  border: 1px solid #333;
-  padding: 3px;
-  border-radius: 5px;
+nav ul li a {
+  display: block;
+  background-color: gray;
+  padding: 10px;
+  text-decoration: none;
 }
 
-input[type=submit] {
-  float: right;
-  clear: both;
+nav ul li a:link,
+a:visited {
+  color: #ffffff;
 }
 
-table {
-  width: 100%;
+nav ul li a:hover {
+  color: #000000;
+  background-color: #8a8a8a;
 }
 
-table th {
-  background-color: #EEE;
-  font-size: 18px;
-}
-
-table td {
-  border-bottom: 1px solid #333;
-  color: #000;
-}
+footer a{
+  text-align: center;
+  /* padding-top: 100px;
+  height: 200px; */
+  background-color: #08298A;
+  color: #ffffff;
+  text-decoration: none ;
+  padding: 0 15px;
+} */
